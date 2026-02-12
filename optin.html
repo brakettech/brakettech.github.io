@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braket Solar Alerts - SMS Opt-In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #ffffff;
+            color: #111827;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        nav a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #2563eb;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #111827;
+            letter-spacing: -0.025em;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #111827;
+        }
+
+        .features {
+            margin-bottom: 4rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            padding: 1.5rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .feature-item h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #111827;
+        }
+
+        .feature-item p {
+            color: #6b7280;
+            font-size: 0.9375rem;
+        }
+
+        .form-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: #111827;
+        }
+
+        input[type="tel"] {
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="tel"]:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+        }
+
+        .checkbox-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        button[type="submit"] {
+            background: #2563eb;
+            color: #ffffff;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            font-family: inherit;
+        }
+
+        button[type="submit"]:hover {
+            background: #1d4ed8;
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        .error-message {
+            display: none;
+            padding: 0.75rem 1rem;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 0.5rem;
+            color: #991b1b;
+            font-size: 0.875rem;
+        }
+
+        .success-message {
+            display: none;
+            padding: 1.5rem;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 0.5rem;
+            color: #166534;
+            text-align: center;
+        }
+
+        .success-message h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .disclosures {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+        }
+
+        .disclosures h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .disclosure-item {
+            margin-bottom: 1.25rem;
+        }
+
+        .disclosure-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .disclosure-item strong {
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .disclosure-item p {
+            color: #6b7280;
+            font-size: 0.9375rem;
+            margin-top: 0.25rem;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #2563eb;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .form-card {
+                padding: 2rem 1.5rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            footer .footer-links {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Braket Technologies" class="logo">
+            <nav>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="hero">
+                <h1>Braket Solar Alerts</h1>
+                <p>Stay informed about your solar system's performance with automated SMS alerts.</p>
+            </div>
+
+            <section class="features">
+                <h2>What You'll Receive</h2>
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <h3>Offline/No Data Alerts</h3>
+                        <p>Get notified when your solar monitoring system goes offline or stops reporting data.</p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>No Production Alerts</h3>
+                        <p>Be informed when your solar panels produce near-zero energy for an extended period.</p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>Low Production Warnings</h3>
+                        <p>Receive alerts when your system's output falls significantly below expected levels based on weather conditions, with yellow and red severity indicators.</p>
+                    </li>
+                </ul>
+                <p style="margin-top: 1.5rem; color: #6b7280; text-align: center; font-size: 0.9375rem;">
+                    Approximately 10 messages per month. No marketing messages.
+                </p>
+            </section>
+
+            <section>
+                <h2>Subscribe to Alerts</h2>
+                <div class="form-card">
+                    <div id="success-message" class="success-message">
+                        <h3>Successfully Subscribed!</h3>
+                        <p>You will now receive SMS alerts from Braket Solar Alerts.</p>
+                    </div>
+
+                    <form id="optin-form" action="#" method="POST">
+                        <div id="error-message" class="error-message"></div>
+
+                        <div class="form-group">
+                            <label for="phone">Mobile Phone Number</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="(512) 555-0123"
+                                required
+                            >
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input
+                                type="checkbox"
+                                id="consent"
+                                name="consent"
+                                required
+                            >
+                            <label for="consent" class="checkbox-label">
+                                I agree to receive automated SMS alerts from Braket Solar Alerts at the number provided. Message frequency varies (~10/month). Msg &amp; data rates may apply. Consent is not required for purchase. Reply STOP to cancel, HELP for help.
+                            </label>
+                        </div>
+
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="disclosures">
+                <h2>Important Information</h2>
+
+                <div class="disclosure-item">
+                    <strong>Message Frequency</strong>
+                    <p>You will receive approximately 10 SMS messages per month. Alerts are sent only when system anomalies are detected or for monthly performance summaries.</p>
+                </div>
+
+                <div class="disclosure-item">
+                    <strong>Message and Data Rates</strong>
+                    <p>Message and data rates may apply. Check with your mobile carrier for details about your plan.</p>
+                </div>
+
+                <div class="disclosure-item">
+                    <strong>Opt-Out</strong>
+                    <p>You can opt out at any time by replying <strong>STOP</strong> to any Braket Solar Alerts message. After opting out, you will receive one final confirmation message.</p>
+                </div>
+
+                <div class="disclosure-item">
+                    <strong>Help</strong>
+                    <p>For assistance, reply <strong>HELP</strong> to any message, or contact us at <a href="mailto:scott@brakettech.com" style="color: #2563eb;">scott@brakettech.com</a>.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            <p>Contact: <a href="mailto:scott@brakettech.com">scott@brakettech.com</a></p>
+            <p style="margin-top: 0.5rem;">Copyright &copy; 2026 Braket Technologies. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('optin-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var phone = document.getElementById('phone').value.trim();
+            var consent = document.getElementById('consent').checked;
+            var errorDiv = document.getElementById('error-message');
+            var successDiv = document.getElementById('success-message');
+            var formElement = document.getElementById('optin-form');
+
+            // Reset error
+            errorDiv.style.display = 'none';
+            errorDiv.textContent = '';
+
+            if (!phone) {
+                errorDiv.textContent = 'Please enter your phone number.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            if (!consent) {
+                errorDiv.textContent = 'Please check the consent box to subscribe.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Show success, hide form
+            formElement.style.display = 'none';
+            successDiv.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

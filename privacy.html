@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Braket Solar Alerts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #ffffff;
+            color: #111827;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        nav a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #2563eb;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #111827;
+            letter-spacing: -0.025em;
+        }
+
+        .last-updated {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .content {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #374151;
+            font-size: 1rem;
+        }
+
+        ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #1d4ed8;
+        }
+
+        .section-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #2563eb;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            footer .footer-links {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Braket Technologies" class="logo">
+            <nav>
+                <a href="optin.html">SMS Opt-In</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="page-title">
+                <h1>Privacy Policy</h1>
+                <p class="last-updated">Last Updated: February 2026</p>
+            </div>
+
+            <div class="content">
+                <div class="section-card">
+                    <h2>Summary</h2>
+                    <p>Braket Solar Alerts is a personal, single-user SMS notification service used only by the owner of the solar PV system and the phone number receiving alerts.</p>
+                </div>
+
+                <h2>Information We Collect</h2>
+                <p>We collect minimal information necessary to operate the service:</p>
+                <ul>
+                    <li>Phone number used to receive alerts (the owner's number)</li>
+                    <li>Solar production metrics retrieved from the owner's solar monitoring API (e.g., daily kWh)</li>
+                    <li>Basic alert logs (timestamp, alert type, actual vs expected) for troubleshooting</li>
+                </ul>
+
+                <h2>How We Use Information</h2>
+                <p>Your information is used exclusively for the following purposes:</p>
+                <ul>
+                    <li>To send system notifications about solar PV performance (no data/offline, no production, or low production)</li>
+                    <li>To store minimal logs needed to operate the service and debug issues</li>
+                </ul>
+
+                <h2>Data Sharing</h2>
+                <p>We do not sell or share personal data with third parties.</p>
+                <p>SMS delivery is provided by Twilio, which necessarily processes message metadata (phone number, message content, delivery status) to deliver SMS messages to you. Twilio's use of this data is governed by their privacy policy.</p>
+
+                <h2>Data Retention</h2>
+                <p>Logs are retained only as long as needed for operation and troubleshooting. Historical logs may be deleted at any time as they are not essential for the service to function.</p>
+
+                <h2>SMS Consent / Opt-Out</h2>
+                <p>Messages are sent only to the phone number provided by the owner of the solar system.</p>
+                <ul>
+                    <li>Reply <strong>STOP</strong> to opt out at any time</li>
+                    <li>Reply <strong>HELP</strong> for help</li>
+                    <li>No marketing messages are sent</li>
+                </ul>
+
+                <h2>Security</h2>
+                <p>We take reasonable measures to protect your phone number and alert data from unauthorized access or disclosure. However, no system can be 100% secure, and you use this service at your own risk.</p>
+
+                <h2>Changes to This Policy</h2>
+                <p>We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated "Last Updated" date. Continued use of the service after changes constitutes acceptance of the updated policy.</p>
+
+                <h2>Contact</h2>
+                <p>For questions about this privacy policy or the Braket Solar Alerts service, please contact:</p>
+                <p><a href="mailto:scott@brakettech.com">scott@brakettech.com</a></p>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-links">
+                <a href="optin.html">SMS Opt-In</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            <p>Contact: <a href="mailto:scott@brakettech.com">scott@brakettech.com</a></p>
+            <p style="margin-top: 0.5rem;">Copyright &copy; 2026 Braket Technologies. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
