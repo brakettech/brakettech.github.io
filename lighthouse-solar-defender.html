@@ -251,6 +251,62 @@ function drawCelebrationParticles(){celebrationParticles.forEach(p=>{ctx.globalA
 function updateFireworks(){for(let i=victoryFireworks.length-1;i>=0;i--){let p=victoryFireworks[i];p.x+=p.vx;p.y+=p.vy;p.vy+=p.gravity;p.vx*=0.98;p.life--;if(p.life<=0)victoryFireworks.splice(i,1);}}
 function drawFireworks(){victoryFireworks.forEach(p=>{ctx.globalAlpha=Math.min(1,p.life/p.maxLife*2);ctx.fillStyle=p.color;ctx.fillRect(Math.floor(p.x),Math.floor(p.y),p.size,p.size);});ctx.globalAlpha=1;}
 
+// ===== LIGHTHOUSE SOLAR PIXEL LOGO =====
+// Pixel-art recreation of the circular logo: dark blue arc top, teal bottom, green house, white U-base
+function drawLHSLogo(cx, cy, sz) {
+  // sz = size of each pixel cell. Logo is a 19x19 grid.
+  const G = sz;
+  const ox = cx - 9*G, oy = cy - 9*G;
+  function p(gx,gy,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.floor(ox+gx*G),Math.floor(oy+gy*G),w*G,h*G);}
+
+  const DB = '#283995'; // dark blue (top arc)
+  const TL = '#4095b5'; // teal (bottom arc)
+  const GR = '#70ec56'; // green (house)
+  const WH = '#FFFFFF'; // white
+
+  // --- Circle background rows (pixel-art circle, r=9 in a 19x19 grid) ---
+  const rows = [
+    [6,7],[4,11],[3,13],[2,15],[1,17],[1,17],[0,19],[0,19],[0,19],[0,19],
+    [0,19],[0,19],[0,19],[1,17],[1,17],[2,15],[3,13],[4,11],[6,7]
+  ];
+  rows.forEach(([sx,w],row) => { p(sx,row,w,1, row < 10 ? DB : TL); });
+
+  // --- White chevron (outer roof arc shape) ---
+  p(4,1,11,1,WH);
+  p(3,2,2,1,WH); p(14,2,2,1,WH);
+  p(2,3,2,1,WH); p(15,3,2,1,WH);
+  p(1,4,2,1,WH); p(16,4,2,1,WH);
+  p(1,5,2,1,WH); p(16,5,2,1,WH);
+  p(1,6,2,1,WH); p(16,6,2,1,WH);
+
+  // --- Green house roof (triangle) ---
+  p(9,2,1,1,GR);
+  p(8,3,3,1,GR);
+  p(7,4,5,1,GR);
+  p(6,5,7,1,GR);
+  p(5,6,9,1,GR);
+
+  // --- Green house body ---
+  p(4,7,11,7,GR);  // rows 7-13
+
+  // --- White U-base (border of door frame) ---
+  p(3,10,13,6,WH);  // white block rows 10-15
+
+  // --- Green left/right walls over white block ---
+  p(4,10,3,6,GR);   // left wall
+  p(12,10,3,6,GR);  // right wall
+
+  // --- White door opening ---
+  p(7,10,5,6,WH);   // white door center
+
+  // --- Subtle pixel outline ---
+  ctx.strokeStyle='rgba(255,255,255,0.2)';
+  ctx.lineWidth=sz*0.5;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 9*G - sz*0.25, 0, Math.PI*2);
+  ctx.stroke();
+}
+
 function drawHUD(){
   ctx.fillStyle='rgba(0,20,45,0.85)';ctx.fillRect(10,60,40,280);ctx.strokeStyle=GOLD;ctx.lineWidth=2;ctx.strokeRect(10,60,40,280);
   let mH=(powerMeter/10)*274,gr=ctx.createLinearGradient(0,338-mH,0,338);gr.addColorStop(0,GOLD);gr.addColorStop(1,ORANGE);ctx.fillStyle=gr;ctx.fillRect(12,338-mH,36,mH);
@@ -266,11 +322,15 @@ function drawHUD(){
 function drawTitle(){
   let sL=level;level=1;drawSky();drawGrassland(Date.now()/50);drawSun();level=sL;
   ctx.fillStyle='rgba(0,20,45,0.8)';ctx.fillRect(162,80,700,460);ctx.strokeStyle=GOLD;ctx.lineWidth=3;ctx.strokeRect(162,80,700,460);ctx.strokeStyle=ORANGE;ctx.lineWidth=1;ctx.strokeRect(167,85,690,450);
-  ctx.textAlign='center';ctx.fillStyle=GOLD;ctx.font='bold 44px monospace';ctx.fillText('LIGHTHOUSE SOLAR',W/2,155);ctx.fillStyle=ORANGE;ctx.font='bold 30px monospace';ctx.fillText('DEFENDER',W/2,200);
-  ctx.fillStyle=GOLD;ctx.fillRect(280,215,464,2);ctx.fillStyle='#FFF';ctx.font='16px monospace';ctx.fillText('Arrow Keys: Move Hero',W/2,260);ctx.fillText('Spacebar: Shoot Laser',W/2,288);
-  ctx.fillStyle=GOLD;ctx.fillText('Collect lightning bolts from the sun!',W/2,325);ctx.fillStyle=ORANGE;ctx.fillText('Destroy fossil fuel enemies!',W/2,350);ctx.fillStyle=GOLD;ctx.fillText('Build solar panels & fill the power meter!',W/2,375);
-  drawHero(W/2-48,400);ctx.fillStyle='#FFF';ctx.font='12px monospace';ctx.fillText('ESC to exit at any time',W/2,430);
-  ctx.fillStyle=GOLD;ctx.font='bold 20px monospace';if(Math.sin(Date.now()/400)>0)ctx.fillText('PRESS SPACE TO START',W/2,500);
+
+  // Pixel logo centered top of panel
+  drawLHSLogo(W/2, 148, 5);
+
+  ctx.textAlign='center';ctx.fillStyle=GOLD;ctx.font='bold 44px monospace';ctx.fillText('LIGHTHOUSE SOLAR',W/2,260);ctx.fillStyle=ORANGE;ctx.font='bold 30px monospace';ctx.fillText('DEFENDER',W/2,300);
+  ctx.fillStyle=GOLD;ctx.fillRect(280,315,464,2);ctx.fillStyle='#FFF';ctx.font='16px monospace';ctx.fillText('Arrow Keys: Move Hero',W/2,350);ctx.fillText('Spacebar: Shoot Laser',W/2,375);
+  ctx.fillStyle=GOLD;ctx.fillText('Collect lightning bolts from the sun!',W/2,408);ctx.fillStyle=ORANGE;ctx.fillText('Destroy fossil fuel enemies!',W/2,430);ctx.fillStyle=GOLD;ctx.fillText('Build solar panels & fill the power meter!',W/2,452);
+  drawHero(W/2-48,468);ctx.fillStyle='#FFF';ctx.font='12px monospace';ctx.fillText('ESC to exit at any time',W/2,490);
+  ctx.fillStyle=GOLD;ctx.font='bold 20px monospace';if(Math.sin(Date.now()/400)>0)ctx.fillText('PRESS SPACE TO START',W/2,527);
 }
 
 // ===== SPAWN =====
@@ -306,6 +366,10 @@ function drawLeaderboard(){
   let sL=level;level=1;drawSky();drawGrassland(Date.now()/80);drawSun();level=sL;
   updateFireworks();if(Math.random()<0.03)spawnFirework(100+Math.random()*800,60+Math.random()*200);drawFireworks();
   ctx.fillStyle='rgba(0,20,45,0.88)';ctx.fillRect(162,30,700,580);ctx.strokeStyle=GOLD;ctx.lineWidth=3;ctx.strokeRect(162,30,700,580);ctx.strokeStyle=ORANGE;ctx.lineWidth=1;ctx.strokeRect(167,35,690,570);
+
+  // Logo top-left of panel
+  drawLHSLogo(210, 68, 3);
+
   ctx.textAlign='center';ctx.fillStyle=GOLD;ctx.font='bold 32px monospace';ctx.fillText('LEADERBOARD',W/2,78);ctx.fillStyle=ORANGE;ctx.fillRect(280,88,464,2);
   if(!nameEntered){
     ctx.fillStyle='#FFF';ctx.font='18px monospace';ctx.fillText('Enter your name:',W/2,125);
@@ -429,6 +493,8 @@ function draw(){
     ctx.fillStyle='#FFF';ctx.font='20px monospace';ctx.fillText('Final Score: '+score,W/2,400);
     let pC=Math.min(8,Math.floor(t/12));for(let i=0;i<pC;i++)drawSolarPanel(180+i*82,430);
     ctx.fillStyle=GOLD;ctx.font='bold 17px monospace';ctx.fillText('Clean energy now powers the world!',W/2,520);
+    // Pixel logo bottom right of panel
+    if(t>40)drawLHSLogo(860, 290, 4);
     let hVX=(t*2)%(W+200)-100,hVY=200+Math.sin(t/20)*35;drawHero(hVX,hVY);
   }
 }
