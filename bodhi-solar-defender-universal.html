@@ -639,7 +639,7 @@ function drawLeaderboard(){
 // ── SPAWN ──────────────────────────────────────────────────────────────────────
 function spawnEnemy(){
   let types=['coal','oil','smoke'],cfg=levels[level-1];
-  let spd=cfg.enemySpeed*(0.8+Math.random()*0.4);
+  let spd=cfg.enemySpeed*(0.8+Math.random()*0.4)*(isTouchDevice ? 2.0 : 1.0);
   if(level===3){
     let side=Math.floor(Math.random()*4),ex,ey,vx,vy;
     if(side===0){ex=W+20;ey=30+Math.random()*(GROUND_Y-90);let a=(Math.random()-0.5)*1.4;vx=-Math.abs(Math.cos(a)*spd);vy=Math.sin(a)*spd;}
@@ -799,9 +799,11 @@ function update(){
 
   scrollX += scrollSpeed;
   let cfg = levels[level-1];
+  // Mobile is easier by default (fluid controls, auto-fire hold), so double the challenge
+  const mobileHard = isTouchDevice ? 0.5 : 1.0; // lower = more frequent spawns
 
   // Enemies
-  enemyTimer++; if(enemyTimer>=cfg.enemyInterval){ spawnEnemy();enemyTimer=0; }
+  enemyTimer++; if(enemyTimer>=cfg.enemyInterval * mobileHard){ spawnEnemy();enemyTimer=0; }
 
   // Bolts (50% less frequent on levels 2 & 3)
   let boltInterval = cfg.enemyInterval * (level>=2 ? 2.4 : 1.2);
