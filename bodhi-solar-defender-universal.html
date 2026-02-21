@@ -142,7 +142,7 @@ let nextPanelX = 60;
 // Solar orb power-up
 let solarOrbs = [], solarOrbTimer = 0, tripleShot = false, tripleShotTimer = 0;
 // Bird easter egg (level 2)
-let bird = null, birdTimer = 0, flowersActive = false, flowerTimer = 0, panelFlowers = [];
+let bird = null, birdTimer = 0, birdUsed = false, flowersActive = false, flowerTimer = 0, panelFlowers = [];
 let celebrationParticles = [], victoryFireworks = [], victoryTimer = 0;
 let leaderboard = [], playerName = '', nameEntered = false, cursorBlink = 0;
 
@@ -573,8 +573,6 @@ function drawTitle(){
   ctx.fillStyle=GOLD;   ctx.font='14px monospace'; ctx.fillText('Collect energy bolts from the sun!',W/2,290);
   ctx.fillStyle=ORANGE; ctx.fillText('Destroy fossil fuel enemies!',W/2,315);
   ctx.fillStyle=GOLD;   ctx.fillText('Build solar panels & fill the power meter!',W/2,340);
-  ctx.fillStyle='#88DDFF'; ctx.font='12px monospace';
-  ctx.fillText('★ Grab the Solar Orb for Triple Cannon!  ★ Find the bird in Level 2!',W/2,368);
 
   drawHero(W/2-48, 390);
 
@@ -691,7 +689,7 @@ function resetLevel(){
   powerMeter=0;enemyTimer=0;boltTimer=0;hero.x=100;hero.y=250;
   sunBrightness=1;invincibleTimer=0;screenDim=0;nextPanelX=60;
   solarOrbs=[];solarOrbTimer=0;tripleShot=false;tripleShotTimer=0;
-  bird=null;birdTimer=0;flowersActive=false;flowerTimer=0;panelFlowers=[];
+  bird=null;birdTimer=0;birdUsed=false;flowersActive=false;flowerTimer=0;panelFlowers=[];
   touchHintTimer=0;
 }
 function addSolarPanel(){
@@ -810,13 +808,13 @@ function update(){
   boltTimer++; if(boltTimer>=boltInterval){ spawnBolt();boltTimer=0; }
 
   // Solar orb (rare)
-  solarOrbTimer++; let orbInterval=cfg.enemyInterval*8; if(solarOrbTimer>=orbInterval){ spawnSolarOrb();solarOrbTimer=0; }
+  solarOrbTimer++; let orbInterval=cfg.enemyInterval*12; if(solarOrbTimer>=orbInterval){ spawnSolarOrb();solarOrbTimer=0; }
 
   // Triple shot countdown
   if(tripleShot){ tripleShotTimer--; if(tripleShotTimer<=0) tripleShot=false; }
 
-  // Bird easter egg: level 2 only
-  if(level===2&&!bird){ birdTimer++; if(birdTimer>600+Math.random()*400){ spawnBird();birdTimer=0; } }
+  // Bird easter egg: level 2 only, once per game
+  if(level===2&&!bird&&!birdUsed){ birdTimer++; if(birdTimer>600+Math.random()*400){ spawnBird();birdTimer=0; } }
 
   // Flower timer
   if(flowersActive){ flowerTimer++; if(flowerTimer>700){ flowersActive=false;panelFlowers=[];flowerTimer=0; } }
@@ -877,13 +875,13 @@ function update(){
   // Bird pickup
   if(bird){
     bird.t++;bird.x+=bird.vx;bird.y+=Math.sin(bird.t*0.05+bird.waveOff)*0.8;
-    if(bird.x<-30){ bird=null; }
+    if(bird.x<-30){ bird=null;birdUsed=true; }
     else {
       let hB={x:hero.x+10,y:hero.y+6,w:76,h:36};
       if(collides(hB,bird)){
         score+=300;flowersActive=true;flowerTimer=0;bloomExistingPanels();
         for(let k=0;k<20;k++) particles.push({x:bird.x+11,y:bird.y+6,vx:(Math.random()-0.5)*5,vy:(Math.random()-0.5)*5,life:30,maxLife:30,color:['#FF88AA','#FFDD55','#FFB6C1','#FF69B4'][Math.floor(Math.random()*4)],size:3+Math.random()*4});
-        bird=null;
+        bird=null;birdUsed=true;
       }
     }
   }
