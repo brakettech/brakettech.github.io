@@ -6,59 +6,33 @@
   <title>Bodhi's Costa Rica Fundraiser</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Nunito', sans-serif;
-      background: #f5fbf3;
-      color: #2a2a2a;
+      font-family: 'Roboto Serif', Georgia, serif;
+      background: #fff;
+      color: #333;
       line-height: 1.7;
+      min-height: 100vh;
     }
 
     /* ════════════════════════════════
-       HEADER BANNER
+       BANNER
     ════════════════════════════════ */
     .banner {
-      background: linear-gradient(135deg, #0d6e40 0%, #1a9e5c 45%, #3ab572 75%, #e8b84b 100%);
       text-align: center;
-      padding: 48px 24px 40px;
-      position: relative;
-      overflow: hidden;
+      padding: 56px 24px 44px;
+      background: #fff;
     }
-
-    /* subtle tropical leaf silhouettes */
-    .banner::before,
-    .banner::after {
-      content: '🌿';
-      font-size: 7rem;
-      position: absolute;
-      opacity: 0.18;
-      top: -10px;
-    }
-    .banner::before { left: -18px; transform: rotate(-30deg); }
-    .banner::after  { right: -18px; transform: rotate(30deg) scaleX(-1); }
 
     .banner h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: clamp(1.8rem, 6vw, 3rem);
-      color: #fff;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    .owl-art {
-      font-family: 'Courier New', monospace;
-      font-size: 0.95rem;
-      line-height: 1.45;
-      color: rgba(255,255,255,0.9);
-      display: inline-block;
-      background: rgba(0,0,0,0.18);
-      border-radius: 10px;
-      padding: 10px 20px;
-      position: relative;
+      font-family: 'Roboto Serif', Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(1.7rem, 5.5vw, 2.8rem);
+      color: #333;
+      letter-spacing: -0.01em;
     }
 
     /* ════════════════════════════════
@@ -70,11 +44,17 @@
       padding: 0 20px 60px;
     }
 
+    /* ── Shared card ── */
+    .glass {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+
     /* ── Hero photo ── */
     .hero {
       text-align: center;
-      margin: -24px auto 36px;
-      position: relative;
+      margin-bottom: 28px;
     }
 
     .hero-link {
@@ -94,8 +74,8 @@
       text-shadow: 0 2px 12px rgba(0,0,0,0.5);
       opacity: 0;
       transition: opacity 0.2s;
-      border-radius: 12px;
-      background: rgba(0,0,0,0.12);
+      border-radius: 8px;
+      background: rgba(0,0,0,0.08);
     }
 
     .hero-link:hover::after { opacity: 1; }
@@ -103,8 +83,8 @@
     .hero img {
       width: 100%;
       max-width: 400px;
-      border-radius: 12px;
-      border: 5px solid #fff;
+      border-radius: 8px;
+      border: 4px solid #fff;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
       display: block;
       margin: 0 auto;
@@ -113,95 +93,69 @@
     .hero-caption {
       margin-top: 10px;
       font-style: italic;
-      color: #5a7a65;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
+      color: #666;
+      font-size: 0.92rem;
     }
 
-    /* ── Section divider ── */
-    .divider {
-      text-align: center;
+    /* ── Divider ── */
+    hr.divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.08);
       margin: 28px 0;
-      color: #a8c8b8;
-      font-size: 1.2rem;
-      letter-spacing: 8px;
     }
 
     /* ── Story text ── */
     .story {
-      background: #fff;
-      border-radius: 14px;
       padding: 24px 28px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 28px;
       font-size: 1.05rem;
+      color: #333;
     }
 
     .story p + p { margin-top: 14px; }
 
-    /* ── Donation levels ── */
-    .levels-section {
-      margin-bottom: 36px;
+    /* ── Section title ── */
+    .section-title {
+      font-family: 'Roboto Serif', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
     }
 
-    .section-title {
-      font-family: 'Pacifico', cursive;
-      font-size: 1.6rem;
-      color: #0d6e40;
-      text-align: center;
-      margin-bottom: 18px;
+    /* ── Donation levels ── */
+    .levels-section {
+      margin-bottom: 28px;
     }
 
     .levels-grid {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     }
 
     .level-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 16px 22px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-      border-left: 5px solid;
-      transition: transform 0.15s, box-shadow 0.15s;
+      padding: 16px 24px;
+      border-bottom: 1px solid #eee;
     }
 
-    .level-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    }
-
-    .level-card:nth-child(1) { border-color: #a0c878; }
-    .level-card:nth-child(2) { border-color: #e8b84b; }
-    .level-card:nth-child(3) { border-color: #e87b4b; }
-
-    .level-icon {
-      font-size: 2rem;
-      flex-shrink: 0;
-      line-height: 1;
-      margin-top: 2px;
-    }
-
-    .level-body {}
+    .level-card:last-child { border-bottom: none; }
 
     .level-name {
-      font-weight: 800;
-      font-size: 1rem;
-      color: #0d6e40;
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: #1a1a1a;
       display: block;
       margin-bottom: 2px;
     }
 
     .level-reward {
-      font-size: 0.95rem;
-      color: #555;
+      font-size: 0.93rem;
+      color: #444;
     }
 
     /* ── How to donate ── */
@@ -209,7 +163,7 @@
 
     .donate-methods {
       display: flex;
-      gap: 20px;
+      gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -218,109 +172,74 @@
       flex: 1 1 220px;
       max-width: 290px;
       text-align: center;
-      background: #fff;
-      border-radius: 16px;
       padding: 24px 18px 20px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-
-    .donate-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.13);
     }
 
     .donate-card img.qr {
       width: 100%;
       max-width: 180px;
-      border-radius: 8px;
+      border-radius: 6px;
       margin-bottom: 14px;
-      border: 2px solid #eee;
     }
 
     .donate-card .payee-name {
-      font-weight: 800;
-      font-size: 1rem;
+      font-weight: 700;
+      font-size: 0.98rem;
       color: #1a1a1a;
       margin-bottom: 4px;
     }
 
     .donate-card .payee-handle {
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       color: #666;
       margin-bottom: 14px;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
-    /* Venmo pill */
-    .pill-venmo {
+    .pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: #008cff;
-      color: #fff;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 7px 20px;
+      gap: 7px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 6px 18px;
       border-radius: 30px;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
     }
 
-    .pill-venmo svg { width: 20px; height: 20px; fill: #fff; }
+    .pill svg { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
 
-    /* Zelle pill */
-    .pill-zelle {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #6d1ed4;
-      color: #fff;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 7px 20px;
-      border-radius: 30px;
-      letter-spacing: 0.3px;
-    }
-
-    .pill-zelle svg { width: 20px; height: 20px; fill: #fff; }
+    .pill-venmo { background: #008cff; color: #fff; }
+    .pill-zelle  { background: #6d1ed4; color: #fff; }
 
     /* ── Footer ── */
     footer {
       text-align: center;
       padding: 28px 20px;
-      color: #7a9a88;
-      font-size: 0.9rem;
-      background: linear-gradient(180deg, transparent, #e4f0e9);
+      color: #999;
+      font-size: 0.88rem;
     }
-
-    footer p { margin-bottom: 4px; }
   </style>
 </head>
 <body>
 
-  <!-- ── Banner ── -->
+  <!-- Banner -->
   <div class="banner">
     <h1>Join me on a trip to Costa Rica!</h1>
-    <div class="owl-art">
-      <pre>  ———
-(  &gt; v &lt;  )
-((________))
-^ ^</pre>
-    </div>
   </div>
 
   <div class="content">
 
-    <!-- ── Hero photo ── -->
+    <!-- Hero photo -->
     <div class="hero">
       <a class="hero-link" href="https://www.youtube.com/shorts/EixJazeMjOE" target="_blank" rel="noopener">
-        <img src="bodhi.png" alt="Bodhi — click to hear about my Costa Rica journey" />
+        <img src="images/bodhi.png" alt="Bodhi — click to hear about my Costa Rica journey" />
       </a>
-      <p class="hero-caption">🎬 Click on image to hear about my journey</p>
+      <p class="hero-caption">Click on image to hear about my journey</p>
     </div>
 
-    <!-- ── Story ── -->
-    <div class="story">
+    <!-- Story -->
+    <div class="story glass">
       <p>
         Remember when you were a kid and dreamt of going on an adventure? That dream is about to
         come true for me! I have an incredible opportunity to head to Costa Rica with my classmates
@@ -337,64 +256,55 @@
       </p>
     </div>
 
-    <div class="divider">✦ ✦ ✦</div>
+    <hr class="divider" />
 
-    <!-- ── Donation levels ── -->
+    <!-- Donation levels -->
     <div class="levels-section">
       <h2 class="section-title">Donation Levels</h2>
       <div class="levels-grid">
 
         <div class="level-card">
-          <div class="level-icon">☕</div>
-          <div class="level-body">
-            <span class="level-name">Level 1 — Coffee Conversationalist</span>
-            <span class="level-reward">Receive a postcard straight from Costa Rica</span>
-          </div>
+          <span class="level-name">Level 1 — Coffee Conversationalist</span>
+          <span class="level-reward">Receive a postcard straight from Costa Rica</span>
         </div>
 
         <div class="level-card">
-          <div class="level-icon">🎨</div>
-          <div class="level-body">
-            <span class="level-name">Level 2 — Painter of Paradise</span>
-            <span class="level-reward">Receive a hand drawn picture of Costa Rica</span>
-          </div>
+          <span class="level-name">Level 2 — Painter of Paradise</span>
+          <span class="level-reward">Receive a hand drawn picture of Costa Rica</span>
         </div>
 
         <div class="level-card">
-          <div class="level-icon">🐒</div>
-          <div class="level-body">
-            <span class="level-name">Level 3 — Jungle Jester</span>
-            <span class="level-reward">Only for tricking oma</span>
-          </div>
+          <span class="level-name">Level 3 — Jungle Jester</span>
+          <span class="level-reward">Only for tricking oma</span>
         </div>
 
       </div>
     </div>
 
-    <div class="divider">✦ ✦ ✦</div>
+    <hr class="divider" />
 
-    <!-- ── How to donate ── -->
+    <!-- How to donate -->
     <div class="donate-section">
       <h2 class="section-title">How to Donate</h2>
       <div class="donate-methods">
 
         <!-- Venmo -->
-        <div class="donate-card">
-          <img class="qr" src="venmo-qr.png" alt="Venmo QR code for Jana Leon Guerrero" />
+        <div class="donate-card glass">
+          <img class="qr" src="images/venmo-qr.png" alt="Venmo QR code for Jana Leon Guerrero" />
           <div class="payee-name">Jana Leon Guerrero</div>
           <div class="payee-handle">@Jana-LeonGuerrero</div>
-          <span class="pill-venmo">
+          <span class="pill pill-venmo">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.384 3c.675 1.108.975 2.25.975 3.698 0 4.61-3.938 10.593-7.133 14.802H5.22L2.616 4.026l5.91-.567 1.351 10.81C11.362 11.857 13.3 8.2 13.3 5.6c0-1.484-.255-2.494-.675-3.33L18.384 3z"/></svg>
             Venmo
           </span>
         </div>
 
         <!-- Zelle -->
-        <div class="donate-card">
-          <img class="qr" src="zelle-qr.jpeg" alt="Zelle QR code — scan in your bank app" />
+        <div class="donate-card glass">
+          <img class="qr" src="images/zelle-qr.jpeg" alt="Zelle QR code — scan in your bank app" />
           <div class="payee-name">Scan to pay via Zelle</div>
           <div class="payee-handle">Open your bank app, scan this code to pay SCOTT at xxx-xxx-2158</div>
-          <span class="pill-zelle">
+          <span class="pill pill-zelle">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.249 2H8.75L2 12.023 8.75 22h6.499l-4.125-6.284H17.5l1.25-3.204H9.625l5.624-10.512zM6.5 12.023 11.25 4.5H8.75l-4.875 7.523 4.875 7.524h2.5L6.5 12.023z"/></svg>
             Zelle
           </span>
@@ -406,9 +316,9 @@
   </div><!-- /content -->
 
   <footer>
-    <p>🌿 Thank you for supporting Bodhi's adventure! 🌿</p>
-    <p>Pura Vida!</p>
+    <p>Thank you for supporting Bodhi's adventure &mdash; Pura Vida!</p>
   </footer>
+
 
 </body>
 </html>
